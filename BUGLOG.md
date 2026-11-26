@@ -6,7 +6,7 @@
 | src/screens/ChatScreen.js | Repeated taps could start overlapping requests. | Set a synchronous request lock and disable the composer while waiting. |
 | src/screens/ChatScreen.js | History route parameters were ignored. | Load the selected SQLite transcript when returning from History. |
 | src/screens/ChatScreen.js | Every conversation used the ID c1 and there was no New chat action. | Create a SQLite ID at first send and expose New chat. |
-| src/screens/ChatScreen.js | The latest reply could sit below the viewport. | Scroll the transcript to the newest turn as content changes. |
+| src/screens/ChatScreen.js | The latest reply could sit below the viewport. | Scroll the native transcript after content or viewport size changes, using its measured end. |
 | src/screens/SettingsScreen.js | Back attempted to open SignIn inside the signed-in stack. | Use the native header back action. |
 | src/screens/HistoryScreen.js | History loaded only once and delete left a stale list. | Refresh on focus and remove the deleted row after SQLite succeeds. |
 | src/screens/ChatScreen.js, src/screens/SignInScreen.js, src/components/MessageBubble.js, src/screens/HistoryScreen.js | Small, low-contrast text and incomplete accessibility labels made the app hard to use. | Use high-contrast text, labeled fields and buttons, larger tap targets, a scrollable sign-in form and a keyboard-aware chat layout. |

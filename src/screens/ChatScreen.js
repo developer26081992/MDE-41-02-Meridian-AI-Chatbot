@@ -91,6 +91,9 @@ function Conversation({ initialId, navigation }) {
 
   const awaitingReply = messages[messages.length - 1]?.role === 'user';
   const disabled = loading || reading || !input.trim();
+  const scrollToLatest = () => requestAnimationFrame(() => {
+    list.current?.getNativeScrollRef()?.scrollToEnd({ animated: false });
+  });
 
   return (
     <SafeAreaView edges={['bottom', 'left', 'right']} style={styles.container}>
@@ -103,7 +106,8 @@ function Conversation({ initialId, navigation }) {
             style={styles.container}
             contentContainerStyle={styles.transcript}
             keyboardShouldPersistTaps="handled"
-            onContentSizeChange={() => list.current?.scrollToEnd({ animated: false })}
+            onContentSizeChange={scrollToLatest}
+            onLayout={scrollToLatest}
             keyExtractor={(message) => String(message.id)}
             renderItem={({ item }) => <MessageBubble message={item} />}
             ListEmptyComponent={<Text style={styles.empty}>Ask about office hours, leave, remote work, expenses, passwords or IT support.</Text>}
