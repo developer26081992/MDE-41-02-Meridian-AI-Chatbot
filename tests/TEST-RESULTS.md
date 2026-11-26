@@ -31,7 +31,7 @@ All five questions also returned the expected answers in separate Android chats 
 | Deleting one conversation left the others visible, and clearing emptied the account’s history | [After deletion](../public/docs/evidence/17-after-delete.png) · [Clear confirmation](../public/docs/evidence/18-confirm-clear-history.png) · [Empty history](../public/docs/evidence/19-empty-history-after-clear.png) |
 | Sign-out returned to sign-in and stayed signed out after an app restart | [Signed out](../public/docs/evidence/20-signed-out.png) · [Restart](../public/docs/evidence/21-signed-out-after-restart.png) |
 
-The speech test verified that the Android speech engine began synthesis and the control switched to **Stop reading**. Host audio was disabled for this emulator run.
+The speech test verified that the Android speech engine began synthesis and the control switched to **Stop reading**. Host audio was disabled during the screenshot run. In a later check with audio enabled, the candidate confirmed that the IT help desk reply was audible after increasing the emulator media volume.
 
 ## Verification commands
 
