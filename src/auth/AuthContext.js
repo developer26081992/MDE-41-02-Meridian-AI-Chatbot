@@ -4,33 +4,35 @@ import { saveToken, getToken, clearToken } from './session';
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(null);
+  const [session, setSession] = useState(null);
+  const [restoring, setRestoring] = useState(true);
+  const [restoreError, setRestoreError] = useState(false);
 
   useEffect(() => {
-    getToken().then((t) => setToken(t));
+    getToken().then(setSession).catch(() => setRestoreError(true)).finally(() => setRestoring(false));
   }, []);
 
-  // Demo sign-in: any @meridian.com address with a password is accepted.
   async function signIn(email, password) {
-    if (!email.includes('@')) {
-      throw new Error('Enter a valid email address');
+    const user = email.trim().toLowerCase();
+    if (!/^[^@\s]+@meridian\.com$/.test(user) || !password.trim()) {
+      throw new Error('Use your @meridian.com email and enter a password.');
     }
-    const newToken = 'demo-' + Date.now();
-    await saveToken(newToken);
-    setToken(newToken);
+    // The supplied project uses a local demonstration session.
+    const next = { token: 'demo-' + Date.now(), user };
+    await saveToken(next);
+    setSession(next);
   }
 
   async function signOut() {
-    setToken(null);
+    await clearToken();
+    setSession(null);
   }
 
   return (
-    <AuthContext.Provider value={{ token, signIn, signOut }}>
+    <AuthContext.Provider value={{ session, restoring, restoreError, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
+export const useAuth = () => useContext(AuthContext);

@@ -1,15 +1,12 @@
+import * as SecureStore from 'expo-secure-store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const KEY = 'sessionToken';
+const KEY = 'meridian.session';
 
-export async function saveToken(token) {
-  await AsyncStorage.setItem(KEY, token);
-}
-
+export const saveToken = (session) => SecureStore.setItemAsync(KEY, JSON.stringify(session));
 export async function getToken() {
-  return AsyncStorage.getItem(KEY);
+  await AsyncStorage.removeItem('sessionToken');
+  const value = await SecureStore.getItemAsync(KEY);
+  return value ? JSON.parse(value) : null;
 }
-
-export async function clearToken() {
-  // TODO: remove the stored token
-}
+export const clearToken = () => SecureStore.deleteItemAsync(KEY);
