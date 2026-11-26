@@ -1,3 +1,6 @@
+37d24e0 Keep the newest reply visible after transcript layout changes
+8c03fe3 Unblock Android startup with Expo SDK 52
+76b34ff Record automated policy results and Git history
 d867847 Document the fixes, starter diagrams and workplace risks
 5342dec Exercise policy answers and failure handling with simulated Claude
 e6bc27b Restore chat context and recover from failed sends
