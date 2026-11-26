@@ -1,20 +1,27 @@
-import { ANTHROPIC_API_KEY } from '../config';
+import { API_URL } from '../config';
 
-// Sends the user's question to the AI service and returns the reply text.
-export async function askAssistant(text) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'x-api-key': ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'claude-haiku-5-5',
-      max_tokens: 512,
-      messages: [{ role: 'user', content: text }],
-    }),
-  });
-  const data = await res.json();
-  return data.content[0].text;
+export async function askAssistant(messages, controller) {
+  const timeout = setTimeout(() => controller.abort(), 28000);
+  try {
+    const response = await fetch(API_URL + '/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify({
+        messages: messages.slice(-24).map(({ role, text }) => ({ role, content: text })),
+      }),
+    });
+    if (!response.ok) {
+      if (response.status === 504) throw new Error('The assistant took too long. Try again.');
+      throw new Error('The assistant is temporarily unavailable. Try again later.');
+    }
+    return await response.json();
+  } catch (error) {
+    if (controller.signal.aborted) throw new Error('The assistant took too long. Try again.');
+    if (error instanceof TypeError) throw new Error('Check your connection and try again.');
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
+
