@@ -4,6 +4,7 @@
     "slug": "meridian-assistant",
     "version": "1.0.0",
     "orientation": "portrait",
+    "newArchEnabled": true,
     "userInterfaceStyle": "light",
     "ios": { "supportsTablet": true },
     "android": { "package": "com.meridian.assistant" }

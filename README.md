@@ -7,8 +7,10 @@ Meridian Consulting Group’s staff policy chatbot. The supplied Expo starter no
 1. Install Node.js 18 or newer and run `npm ci` in this directory.
 2. Copy `.env.example` to `backend/.env`. Create your own key at the [Anthropic Console](https://console.anthropic.com/) and enter it as `ANTHROPIC_API_KEY` in that local file. The example specifies the model and port. Git ignores the populated file.
 3. Run `npm run backend` and check that `http://localhost:3000/health` returns `{"ok":true}`.
-4. In another terminal, run `npx expo start`. Use an Android emulator with an Expo Go build compatible with SDK 51, or a compatible iOS simulator or phone. Press **a** for Android or open the Expo link on the device.
+4. In another terminal, run `npx expo start`. Use an Android emulator with an Expo Go build compatible with SDK 52, or a compatible iOS simulator or phone. Press **a** for Android or open the Expo link on the device.
 5. Sign in with a test identity such as `demo@meridian.com` and any non-empty test password. The starter uses local demo sign-in. There is no corporate identity provider in this project.
+
+The starter was upgraded in place from Expo SDK 51 to 52 after the SDK 51 Expo Go client crashed before opening the app. The tested setup used Android 11 and the SDK 52 Expo Go build. [SDK 52 Expo Go download](https://expo.dev/go?device=false&platform=android&sdkVersion=52)
 
 The Android emulator defaults to `http://10.0.2.2:3000` and the iOS simulator to `http://localhost:3000`. For a phone, set the development computer’s LAN address before launching Expo. Keep both devices on the same network and allow the backend port through the development computer’s firewall.
 

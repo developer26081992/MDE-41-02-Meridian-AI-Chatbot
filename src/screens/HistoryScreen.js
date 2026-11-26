@@ -48,7 +48,7 @@ export default function HistoryScreen({ navigation }) {
             <View style={styles.row}>
               <TouchableOpacity style={styles.open} accessibilityRole="button"
                 accessibilityLabel={'Open conversation: ' + item.title}
-                onPress={() => navigation.navigate('Chat', { conversationId: item.id, selection: Date.now() })}>
+                onPress={() => navigation.popTo('Chat', { conversationId: item.id, selection: Date.now() })}>
                 <Text style={styles.title}>{item.title}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.action} accessibilityRole="button"

@@ -16,7 +16,7 @@ function Routes() {
   if (restoring) return <View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator accessibilityLabel="Restoring session" /></View>;
 
   return (
-    <Stack.Navigator screenOptions={{ headerTintColor: '#153459', headerBackTitleVisible: false }}>
+    <Stack.Navigator screenOptions={{ headerTintColor: '#153459', headerBackButtonDisplayMode: 'minimal' }}>
       {session?.token ? (
         <>
           <Stack.Screen name="Chat" component={ChatScreen} />

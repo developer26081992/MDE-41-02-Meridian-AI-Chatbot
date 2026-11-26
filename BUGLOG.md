@@ -19,3 +19,4 @@
 | src/components/TalkToPersonButton.js, src/components/MessageBubble.js | Human handoff was disconnected. | Show HR and IT directory guidance on handoff replies. |
 | src/db/database.js, db/schema.sql | History existed only in memory. Delete and clear were stubs. | Use SQLite with user ownership and cascading deletion. |
 | src/components/SpeakButton.js, src/components/MessageBubble.js | The speech function received an object and had no entry point. | Pass the reply string to Expo Speech and add accessible read and stop controls. |
+| package.json, app.json, App.js, src/screens/HistoryScreen.js | The SDK 51 Expo Go client crashed at the native root view on the test emulator. | Upgrade the starter to SDK 52, align the navigation stack and use the version 7 return action when opening a transcript. |
