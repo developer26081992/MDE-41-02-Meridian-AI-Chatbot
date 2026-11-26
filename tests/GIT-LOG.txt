@@ -1,0 +1,16 @@
+d867847 Document the fixes, starter diagrams and workplace risks
+5342dec Exercise policy answers and failure handling with simulated Claude
+e6bc27b Restore chat context and recover from failed sends
+448f9dc Distinguish message authors and surface reply actions
+76fea63 Read assistant replies using the device speech engine
+cef67f5 Connect human handoff to the HR and IT directory guidance
+4a25e8e Announce chat loading while the policy request runs
+1ad82d3 Use native Back and confirm history clearing in Settings
+5e5960a Refresh history and reopen the selected conversation
+0bb7dd8 Persist separate account conversations using SQLite
+8f1abeb Make sign-in usable with screen readers and a small screen
+348d1c0 Persist and clear demo sessions with SecureStore
+3ad02a9 Ground Claude replies in approved policy and handle service failures
+41e44a8 Correct the Meridian policy figures
+ae72224 Keep Claude credentials on the backend
+5b0c4f3 Import Meridian examination starter
