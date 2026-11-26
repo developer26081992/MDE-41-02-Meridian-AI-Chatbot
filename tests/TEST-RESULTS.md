@@ -1,16 +1,18 @@
 # Meridian Assistant test record
 
-The Android run used the SDK 52 build of Expo Go on an Android 11 emulator at 360 × 640 dp. The local Node backend used simulated Claude topic selections, so these results verify the end-to-end app flow and the approved answer text. Live model topic selection remains pending a candidate-owned Claude key.
+The Android run used the SDK 52 build of Expo Go on an Android 11 emulator at 360 × 640 dp. The local Node backend used simulated Claude topic selections, so these results verify the end-to-end app flow and the approved answer text.
 
 ## Policy questions
 
+All five questions also returned the expected answers in separate Android chats using the live Claude backend. The simulated run is retained as reproducible evidence.
+
 | Question | Expected answer | Result and screenshot |
 | --- | --- | --- |
-| How many annual leave days do full-time staff get? | 22 days per year, requested at least 10 working days in advance. | Pass · [Annual leave](../public/docs/evidence/02-annual-leave.png) |
-| How many days can I work remotely? | Up to two days per week with manager approval. | Pass · [Remote work](../public/docs/evidence/04-remote-working.png) |
-| What is the deadline for expense claims, and who approves claims over $500? | Submit within 30 days with receipts. Claims above $500 require director approval. | Pass · [Expense claims](../public/docs/evidence/05-expense-claims.png) |
-| How do I reset my password and when does my account lock? | Use the self-service portal. Accounts lock after five failed sign-in attempts. | Pass · [Password reset](../public/docs/evidence/06-password-reset.png) |
-| When is the IT help desk open? | 08:00 to 18:00 on working days. | Pass · [IT support](../public/docs/evidence/07-it-support.png) |
+| How many annual leave days do full-time staff get? | 22 days per year, requested at least 10 working days in advance. | Pass · [Annual leave](../public/docs/evidence/02-annual-leave.png) (simulated) · [Live Claude](../public/docs/evidence/live-01-annual-leave.png) |
+| How many days can I work remotely? | Up to two days per week with manager approval. | Pass · [Remote work](../public/docs/evidence/04-remote-working.png) (simulated) · [Live Claude](../public/docs/evidence/live-02-remote-work.png) |
+| What is the deadline for expense claims, and who approves claims over $500? | Submit within 30 days with receipts. Claims above $500 require director approval. | Pass · [Expense claims](../public/docs/evidence/05-expense-claims.png) (simulated) · [Live Claude](../public/docs/evidence/live-03-expenses.png) |
+| How do I reset my password and when does my account lock? | Use the self-service portal. Accounts lock after five failed sign-in attempts. | Pass · [Password reset](../public/docs/evidence/06-password-reset.png) (simulated) · [Live Claude](../public/docs/evidence/live-04-password.png) |
+| When is the IT help desk open? | 08:00 to 18:00 on working days. | Pass · [IT support](../public/docs/evidence/07-it-support.png) (simulated) · [Live Claude](../public/docs/evidence/live-05-it-support.png) |
 
 **Outside-scope example.** Asking “Who won the World Cup?” produced “I can only answer questions about Meridian workplace policies in my guide.” It also exposed the human handoff action.
 
