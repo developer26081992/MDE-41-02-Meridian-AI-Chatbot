@@ -1,82 +1,35 @@
-# Meridian Assistant: starter project (MDE-41-02)
+# Meridian Assistant
 
-A React Native (Expo) chatbot app for Meridian Consulting Group staff, plus a small Node backend that talks to Claude.
-**This project is unfinished and contains faults.** Your job in the examination is to get it running, find and fix the faults, and complete the missing parts, as set out in the question paper.
+Meridian Consulting Group’s staff policy chatbot. The supplied Expo starter now uses a Node API for Claude and on-device SQLite for conversation history.
 
-## 1. What you need installed
+## Run the app
 
-- **Node.js 18 or newer** (https://nodejs.org)
-- **Git**
-- A code editor (VS Code recommended)
-- **Expo Go** on a phone, **or** an Android emulator (Android Studio) / iOS simulator
-- Your own **Claude API key** from https://console.anthropic.com
+1. Install Node.js 18 or newer and run `npm ci` in this directory.
+2. Copy `.env.example` to `backend/.env`. Create your own key at the [Anthropic Console](https://console.anthropic.com/) and enter it as `ANTHROPIC_API_KEY` in that local file. The example specifies the model and port. Git ignores the populated file.
+3. Run `npm run backend` and check that `http://localhost:3000/health` returns `{"ok":true}`.
+4. In another terminal, run `npx expo start`. Use an Android emulator with an Expo Go build compatible with SDK 51, or a compatible iOS simulator or phone. Press **a** for Android or open the Expo link on the device.
+5. Sign in with a test identity such as `demo@meridian.com` and any non-empty test password. The starter uses local demo sign-in. There is no corporate identity provider in this project.
 
-## 2. Set up
+The Android emulator defaults to `http://10.0.2.2:3000` and the iOS simulator to `http://localhost:3000`. For a phone, set the development computer’s LAN address before launching Expo. Keep both devices on the same network and allow the backend port through the development computer’s firewall.
 
-```bash
-# 1. Unzip this folder, open a terminal inside it, then:
-npm install
-
-# 2. Start a Git repository of your own
-git init
-git add .
-git commit -m "Initial commit: Meridian starter"
-# Create an empty PUBLIC repository on GitHub and push to it
-
-# 3. Run the app
-npx expo start
-# press "a" for Android emulator, or scan the QR code with Expo Go
+```powershell
+$env:EXPO_PUBLIC_API_URL = 'http://192.168.1.10:3000'
+npx.cmd expo start
 ```
 
-### Run the backend
+## Verify
 
-```bash
-# create backend/.env from the example, and add your own key
-copy .env.example backend\.env      # Windows
-cp .env.example backend/.env        # Mac / Linux
+Run `node --test tests/backend.test.cjs` for backend contract tests. These simulate Claude tool responses. For a live run, use the normal backend with your key and ask the five questions in [test results](tests/TEST-RESULTS.md).
 
-npm run backend                     # starts on http://localhost:3000
-```
+The [navigation map and data model](public/docs/README.md) mark the starter discrepancies. The [bug log](BUGLOG.md) records the fixes. History works offline after the app has loaded on the device. Use **New chat** to begin a separate transcript. Human handoff points to the staff directory because the policy extract supplies office hours for IT but no contact addresses. **Read aloud** uses the device's speech engine.
 
-Open `http://localhost:3000/health`: you should see `{"ok":true}`.
+## AI tools used
 
-### Connecting the app to the backend
+- OpenAI Codex (GPT-6) assisted with reading, debugging, implementing, testing and documenting the starter.
+- Anthropic Claude is the chatbot service configured for live requests. Simulated results are labeled in the test record.
 
-Edit `src/config.js`:
+## Reflection
 
-| You are using | Set `API_URL` to |
-|---|---|
-| Android emulator | `http://10.0.2.2:3000` |
-| iOS simulator | `http://localhost:3000` |
-| Phone with Expo Go | `http://<your computer's IP address>:3000` (same Wi-Fi) |
+An incorrect policy answer can affect someone’s pay, leave plans or access to work systems. For example, the starter claimed that employees had 25 days of annual leave and could request it five working days ahead. Staff who relied on those figures could make travel plans or submit requests that conflict with Meridian’s actual policy. I corrected the policy extract and made the backend return approved excerpts selected from a fixed set of topics. Claude uses recent conversation turns to work out what a follow-up refers to, while the application supplies the actual wording staff see. An unrelated question gets a clear decline. Requests for help outside the extract can be directed to HR or IT. This design still depends on accurate topic selection and on Meridian keeping the extract current. Checking representative questions and reviewing the extract when policies change are both important.
 
-## 3. Project map
-
-```
-App.js                     navigation
-src/config.js              settings
-src/auth/                  sign-in and session storage
-src/api/chat.js            how the app asks the AI
-src/db/database.js         conversation storage
-src/screens/               Sign-in, Chat, History, Settings
-src/components/            message bubble, typing indicator, speak and hand-over buttons
-backend/                   server, system prompt, policy information
-db/schema.sql              intended database design
-public/docs/               put your diagrams here
-tests/                     your test questions and results
-```
-
-## 4. Rules
-
-- Work **only** in this project. Do not start a new one.
-- Keep a **bug log** (`BUGLOG.md`): file, what was wrong, how you fixed it.
-- Commit **regularly** with meaningful messages, at least one for each fault fixed.
-- Put your diagrams (wireframes of what you changed, navigation map, data model) in **`public/docs/`**, committed to your **public** repository. Photos or scans of hand-drawn diagrams are accepted. You may draw with any free or open-source tool (draw.io, Penpot, Excalidraw, Mermaid) or on paper.
-- **Never commit an API key.** Keys belong only in `backend/.env`, which must be ignored by Git.
-- Record the AI tools you used in this README (below) and add your 300-word reflection.
-
-## 5. My notes (candidates write below)
-
-**AI tools I used:**
-
-**Reflection (about 300 words):**
+A second risk is exposure of confidential information. Staff may type sensitive details into a conversation, and transcripts can remain on a shared or lost device. The starter also invited developers to put the Claude key into mobile code, where it could be extracted from the app bundle. I moved the integration to the server, excluded environment files from Git and stored the demo session token in SecureStore. The SQLite queries restrict history to the signed-in account and support deleting a single conversation or clearing the account’s history. These controls reduce accidental exposure in the app, but local demo sign-in verifies only the email format and presence of a password. The SQLite database is also readable by anyone who can obtain its file. A workplace deployment would need corporate authentication, protected transport, access controls and a clear retention policy. Staff would also need to know that recent conversation turns are sent to the AI service and should keep personal information out of their questions.

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="560" viewBox="0 0 1140 560" role="img" aria-label="Meridian on-device data model">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#527497"/></marker></defs>
+<rect width="1140" height="560" fill="#f4f7fb"/>
+<g font-family="Segoe UI,Arial,sans-serif" fill="#153459">
+<text x="36" y="50" font-size="29" font-weight="700">Meridian on-device data model</text>
+<text x="36" y="82" font-size="17">A single local SQLite database stores user-scoped conversations and ordered messages.</text>
+<path d="M296 235 L395 235" fill="none" stroke="#527497" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M675 235 L773 235" fill="none" stroke="#527497" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="36" y="137" width="260" height="218" rx="13" fill="white" stroke="#a8bfd6"/>
+<text x="52" y="166" font-size="19" font-weight="700">users</text>
+<text x="52" y="192" font-size="15">PK email (normalized)</text>
+<text x="52" y="214" font-size="15">One user owns many conversations</text>
+<text x="52" y="236" font-size="15">No password stored</text>
+<rect x="395" y="137" width="280" height="218" rx="13" fill="white" stroke="#a8bfd6"/>
+<text x="411" y="166" font-size="19" font-weight="700">conversations</text>
+<text x="411" y="192" font-size="15">PK id</text>
+<text x="411" y="214" font-size="15">FK owner → users.email</text>
+<text x="411" y="236" font-size="15">title, created_at</text>
+<text x="411" y="258" font-size="15">Delete cascades to messages</text>
+<rect x="773" y="137" width="330" height="218" rx="13" fill="white" stroke="#a8bfd6"/>
+<text x="789" y="166" font-size="19" font-weight="700">messages</text>
+<text x="789" y="192" font-size="15">PK id (also used for ordering)</text>
+<text x="789" y="214" font-size="15">FK conversation_id → conversations.id</text>
+<text x="789" y="236" font-size="15">role, text, handoff, created_at</text>
+<text x="789" y="258" font-size="15">Roles are user and assistant</text>
+<rect x="36" y="408" width="1068" height="116" rx="12" fill="#e3edf8"/>
+<text x="52" y="437" font-size="18" font-weight="700">Starter discrepancies</text>
+<text x="52" y="464" font-size="15">The starter schema was unused. In-memory storage had a single ‘current’ slot.</text>
+<text x="52" y="486" font-size="15">It had no user ownership and lookup indexed by a different key than save.</text>
+<text x="52" y="508" font-size="15">Delete and clear were placeholders. SecureStore now carries the active demo session separately.</text>
+</g></svg>

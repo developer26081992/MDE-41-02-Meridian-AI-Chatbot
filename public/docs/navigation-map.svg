@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="560" viewBox="0 0 1140 560" role="img" aria-label="Meridian Assistant navigation">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#527497"/></marker></defs>
+<rect width="1140" height="560" fill="#f4f7fb"/>
+<g font-family="Segoe UI,Arial,sans-serif" fill="#153459">
+<text x="36" y="50" font-size="29" font-weight="700">Meridian Assistant navigation</text>
+<text x="36" y="82" font-size="17">Secure session controls access to the signed-in stack.</text>
+<path d="M261 188 L350 188" fill="none" stroke="#527497" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M148 250 L148 284" fill="none" stroke="#527497" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M261 315 L350 244" fill="none" stroke="#527497" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M615 170 L733 153" fill="none" stroke="#527497" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M733 193 L615 211" fill="none" stroke="#527497" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M615 246 L733 306" fill="none" stroke="#527497" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="36" y="145" width="225" height="105" rx="13" fill="white" stroke="#a8bfd6"/>
+<text x="52" y="174" font-size="19" font-weight="700">App launch</text>
+<text x="52" y="200" font-size="15">Restore local secure session</text>
+<text x="52" y="222" font-size="15">Route based on session</text>
+<rect x="36" y="284" width="225" height="88" rx="13" fill="white" stroke="#a8bfd6"/>
+<text x="52" y="313" font-size="19" font-weight="700">Sign-in</text>
+<text x="52" y="339" font-size="15">Valid demo credentials → Chat</text>
+<rect x="350" y="145" width="265" height="125" rx="13" fill="white" stroke="#a8bfd6"/>
+<text x="366" y="174" font-size="19" font-weight="700">Chat</text>
+<text x="366" y="200" font-size="15">New chat resets the transcript</text>
+<text x="366" y="222" font-size="15">History opens saved conversations</text>
+<text x="366" y="244" font-size="15">Settings manages the account</text>
+<rect x="733" y="105" width="350" height="105" rx="13" fill="white" stroke="#a8bfd6"/>
+<text x="749" y="134" font-size="19" font-weight="700">History</text>
+<text x="749" y="160" font-size="15">Open returns to Chat with saved turns</text>
+<text x="749" y="182" font-size="15">Delete removes the selected transcript</text>
+<rect x="733" y="264" width="350" height="105" rx="13" fill="white" stroke="#a8bfd6"/>
+<text x="749" y="293" font-size="19" font-weight="700">Settings</text>
+<text x="749" y="319" font-size="15">Stack back returns to Chat</text>
+<text x="749" y="341" font-size="15">Sign out clears session → Sign-in</text>
+<rect x="36" y="408" width="1068" height="116" rx="12" fill="#e3edf8"/>
+<text x="52" y="437" font-size="18" font-weight="700">Starter discrepancies</text>
+<text x="52" y="464" font-size="15">History passed an ID but Chat ignored it. Chat always saved to one fixed ID.</text>
+<text x="52" y="486" font-size="15">Settings Back navigated to a signed-out route. Sign-out left the token stored.</text>
+<text x="52" y="508" font-size="15">Human handoff was a detached stub. It now appears on eligible replies.</text>
+</g></svg>
